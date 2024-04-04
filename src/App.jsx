@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+
+import Navigation from "./components/Navigation.jsx"
+
 import pricesService from "./services/pricesService.js"
 
 const App = () => {
@@ -15,7 +18,7 @@ const App = () => {
 
   return (
     <>
-
+      <Navigation></Navigation>
     </>
   )
 }

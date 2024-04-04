@@ -1,0 +1,42 @@
+nav {
+  position: sticky;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 6.5rem;
+  height: 100vh;
+  
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
+    .active, &:hover {
+      border-radius: 0.25rem;
+    }
+
+    background-color: $albionRed;
+    color: $albionWhite;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: x-large;
+    &:first-of-type {
+      font-size: medium;
+    }
+    
+    margin: 1rem auto 0;
+
+    transition: all 0.2s ease-out;
+  }
+
+  .separator {
+    border-bottom: 2px solid $albionRed;
+    margin: 1rem 0.5rem 0
+  }
+
+  background-color: $albionBlack;
+}

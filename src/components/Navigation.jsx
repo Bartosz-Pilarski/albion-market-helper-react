@@ -1,17 +1,32 @@
 import './Navigation.scss'
 
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import ResourceLink from './ResourceLink'
 
 const Navigation = () => {
+  const location = useLocation().pathname
+  console.log(location)
+
   return(
     <nav>
-      <Link to={'/'}>Albion <br /> Market <br /> Helper</Link>
+      <Link 
+        className={location === '/' ? 'active' : ''} 
+        to={'/'}
+        >
+          Albion <br /> 
+          Market <br /> 
+          Helper
+      </Link>
       <div className="separator"></div>
-      <Link to={'/metal'}>Metal</Link>
-      <Link to={'/wood'}>Wood</Link>
-      <Link to={'/fiber'}>Fiber</Link>
-      <Link to={'/stone'}>Stone</Link>
-      <Link to={'/hide'}>Hide</Link>
+      <ResourceLink resource='metal' />
+
+      <ResourceLink resource='wood' />
+      
+      <ResourceLink resource='fiber' />
+
+      <ResourceLink resource='stone' />
+
+      <ResourceLink resource='hide' />
     </nav>
   )
 }

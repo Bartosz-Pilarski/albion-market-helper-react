@@ -1,3 +1,15 @@
 $albionRed: #a72725;
 $albionWhite: #FFFFFF;
 $albionBlack: #291f1f;
+$albionGrey: #979694;
+
+.separator {
+  border-bottom: 2px solid $albionRed;
+  margin: 1rem 0.5rem 0
+}
+
+.highlight {
+  color: $albionRed;
+  font-weight: bold;
+  text-shadow: $albionRed 0px 0px 2px;
+}

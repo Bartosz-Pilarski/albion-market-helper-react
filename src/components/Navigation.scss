@@ -1,10 +1,11 @@
 nav {
   position: sticky;
+  top: 0;
 
   display: flex;
   flex-direction: column;
 
-  width: 6.5rem;
+  width: 7.5rem;
   height: 100vh;
   
   a {
@@ -15,9 +16,6 @@ nav {
     width: 5rem;
     height: 5rem;
     border-radius: 5rem;
-    .active, &:hover {
-      border-radius: 0.25rem;
-    }
 
     background-color: $albionRed;
     color: $albionWhite;
@@ -30,13 +28,34 @@ nav {
     
     margin: 1rem auto 0;
 
+    &:hover {
+      border-radius: 0.25rem;
+    }
     transition: all 0.2s ease-out;
   }
-
-  .separator {
-    border-bottom: 2px solid $albionRed;
-    margin: 1rem 0.5rem 0
+  .active {
+    border-radius: 0.25rem !important;
+    box-shadow: $albionRed 0px 0px 16px;
+  }
+  .metal, .wood, .fiber, .stone, .hide {
+    background-size: 7rem 7rem;
+    background-position: -1rem -0.8rem;
+  }
+  .metal {
+    background-image: url('../../public/images/METAL.png');
+  }
+  .wood {
+    background-image: url('../../public/images/WOOD.png');
+  }
+  .fiber {
+    background-image: url('../../public/images/FIBER.png');
+  }
+  .stone {
+    background-image: url('../../public/images/STONE.png');
+  }
+  .hide {
+    background-image: url('../../public/images/HIDE.png');
   }
 
-  background-color: $albionBlack;
+  background-color: darken($albionBlack, 10);
 }

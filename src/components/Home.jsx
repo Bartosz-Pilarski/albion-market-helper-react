@@ -4,7 +4,7 @@ import sectionThreeImage from '../../public/images/section3.png'
 
 const Home = () => {
   return(
-    <div id="home">
+    <div id="home" className='main-view'>
       <div id="hero">
         <header>
           <h1>
@@ -31,7 +31,7 @@ const Home = () => {
       <div className="section">
         <img className="sectionImg" src={sectionThreeImage} alt="Man rides transport ox into forest" />
         <p>
-          Keep an eye on profitable routes or price oppurtunities with our app and stay ahead!
+          Keep an eye on profitable routes or price opportunities with our app and stay ahead!
         </p>
       </div>
       <footer>

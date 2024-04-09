@@ -1,12 +1,13 @@
+import { useSelector } from 'react-redux'
 import './Navigation.scss'
 
 import { Link, useLocation } from 'react-router-dom'
 
-const ResourceLink = ({ resource, location }) => {
+const ResourceLink = ({ resource, location, currentTier }) => {
   return(
     <Link 
     className={`${location === '/'+resource ? 'active' : ''} ${resource} resourceLink`} 
-    to={`/${resource}`}
+    to={`/${resource}/${currentTier}`}
     >
       {resource.charAt(0).toUpperCase()+resource.slice(1)}
     </Link>
@@ -15,6 +16,9 @@ const ResourceLink = ({ resource, location }) => {
 
 const Navigation = () => {
   const location = useLocation().pathname
+  const currentTier = useSelector((state) => state.tier)
+
+  const resources = ['metal', 'wood', 'fiber', 'stone', 'hide']
 
   return(
     <nav className='main-navigation'>
@@ -27,15 +31,11 @@ const Navigation = () => {
           Helper
       </Link>
       <div className="separator"></div>
-      <ResourceLink resource='metal' location={location} />
-
-      <ResourceLink resource='wood'  location={location} />
-      
-      <ResourceLink resource='fiber' location={location} />
-
-      <ResourceLink resource='stone' location={location} />
-
-      <ResourceLink resource='hide'  location={location} />
+      {
+        resources.map(
+          (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} location={location} currentTier={currentTier} /> 
+        )
+      }
     </nav>
   )
 }

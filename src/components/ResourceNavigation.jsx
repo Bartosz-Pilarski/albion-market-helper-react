@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import './ResourceNavigation.scss'
+import { useDispatch } from 'react-redux'
+import { changeTier } from '../reducers/tierReducer'
 
 const numberToNumeral = {
   2: "II",
@@ -12,10 +14,16 @@ const numberToNumeral = {
 }
 
 const ResourceLink = ({ tier }) => {
+  const dispatch = useDispatch()
+
+  const handleClick = (tier) => {
+    dispatch(changeTier(tier))
+  }
+
   return(
     <li className={`tier${tier}-background`}>
     <div className='link-wrapper'>
-        <Link className={`tier${tier}`} to={`${tier}`}> Tier {numberToNumeral[tier]} </Link>
+        <Link onClick={() => handleClick(tier)} className={`tier${tier}`} to={`${tier}`}> Tier {numberToNumeral[tier]} </Link>
     </div>
   </li>
   )

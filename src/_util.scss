@@ -3,9 +3,48 @@ $albionWhite: #FFFFFF;
 $albionBlack: #291f1f;
 $albionGrey: #979694;
 
+@use 'sass:map';
+$tier-colors: (
+  'tier2Light': #856D5E,
+  'tier2Dark': #605147,
+  'tier3Light': #51683F,
+  'tier3Dark': #3B4C2E,
+  'tier4Light': #4F768E,
+  'tier4Dark': #325770,
+  'tier5Light': #8A3D36,
+  'tier5Dark': #6F1F19,
+  'tier6Light': #D78548,
+  'tier6Dark': #B36427,
+  'tier7Light': #DCBE5B,
+  'tier7Dark': #C0A23D,
+  'tier8Light': #F4F4F4,
+  'tier8Dark': #CECECE,
+);
+
+$tier2Light: #856D5E;
+$tier2Dark: #605147;
+$tier3Light: #51683F;
+$tier3Dark: #3B4C2E;
+$tier4Light: #4F768E;
+$tier4Dark: #325770;
+$tier5Light: #8A3D36;
+$tier5Dark: #6F1F19;
+$tier6Light: #D78548;
+$tier6Dark: #B36427;
+$tier7Light: #DCBE5B;
+$tier7Dark: #C0A23D;
+$tier8Light: #F4F4F4;
+$tier8Dark: #CECECE;
+
 .separator {
   border-bottom: 2px solid $albionRed;
   margin: 1rem 0.5rem 0
+}
+
+@for $tier from 2 through 8 {
+  .tier#{$tier}-background {
+    background-image: linear-gradient(to right, map.get($tier-colors, 'tier'+$tier+'Light'), map.get($tier-colors, 'tier'+$tier+'Dark'));
+  }
 }
 
 .highlight {

@@ -5,8 +5,7 @@ import ResourceLink from './ResourceLink'
 
 const Navigation = () => {
   const location = useLocation().pathname
-  console.log(location)
-
+  
   return(
     <nav>
       <Link 

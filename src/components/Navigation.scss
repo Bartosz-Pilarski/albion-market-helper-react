@@ -7,9 +7,17 @@ nav {
 
   width: 7.5rem;
   height: 100vh;
+
+  overflow-y: scroll;
+  &::--webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   
   a {
     display: flex;
+    flex: none;
     justify-content: center;
     align-items: center;
 

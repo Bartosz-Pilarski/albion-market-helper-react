@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import Navigation from "./components/Navigation.jsx"
 
@@ -21,17 +21,16 @@ const App = () => {
 
   return (
     <main>
-      <Navigation></Navigation>
+      <Navigation />
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/metal" element={<ResourceView resourceType='Metal' />} />
-        <Route path="/wood"  element={<ResourceView resourceType='Wood'  />} />
-        <Route path="/fiber" element={<ResourceView resourceType='Fiber' />} />
-        <Route path="/stone" element={<ResourceView resourceType='Stone' />} />
-        <Route path="/hide"  element={<ResourceView resourceType='Hide'  />} />
+        <Route path="/metal/*" element={<ResourceView resourceType='Metal' />} />
+        <Route path="/wood/*"  element={<ResourceView resourceType='Wood'  />} />
+        <Route path="/fiber/*" element={<ResourceView resourceType='Fiber' />} />
+        <Route path="/stone/*" element={<ResourceView resourceType='Stone' />} />
+        <Route path="/hide/*"  element={<ResourceView resourceType='Hide'  />} />
 
-        {/* Default redirect to homepage in case of unknown url*/}
-        <Route path="*" element={<Navigate to={"/"} replace={true} />} />
+
       </Routes>
     </main>
   )

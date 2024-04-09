@@ -1,6 +1,6 @@
-import sectionOneImage from '../../public/images/section1.png'
-import sectionTwoImage from '../../public/images/section2.png'
-import sectionThreeImage from '../../public/images/section3.png'
+import sectionOneImage from '../images/section1.png'
+import sectionTwoImage from '../images/section2.png'
+import sectionThreeImage from '../images/section3.png'
 
 const Home = () => {
   return(

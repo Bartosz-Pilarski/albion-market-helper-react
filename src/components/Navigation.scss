@@ -50,19 +50,19 @@ nav {
     background-position: -1rem -0.8rem;
   }
   .metal {
-    background-image: url('../../public/images/METAL.png');
+    background-image: url('../images/METAL.png');
   }
   .wood {
-    background-image: url('../../public/images/WOOD.png');
+    background-image: url('../images/WOOD.png');
   }
   .fiber {
-    background-image: url('../../public/images/FIBER.png');
+    background-image: url('../images/FIBER.png');
   }
   .stone {
-    background-image: url('../../public/images/STONE.png');
+    background-image: url('../images/STONE.png');
   }
   .hide {
-    background-image: url('../../public/images/HIDE.png');
+    background-image: url('../images/HIDE.png');
   }
 
   background-color: darken($albionBlack, 10);

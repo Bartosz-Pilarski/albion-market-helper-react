@@ -10,18 +10,20 @@ main {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-image: url('.././public/images/background.jpeg');
+  background-image: url('./images/background.jpeg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#home {
+.main-view {
   flex-grow: 1;
-  
+  width: 100%;
+}
+
+#home {
   #hero {
-    width: 100%;
     padding: 8rem 0 16rem;
     h1, h2 {
       text-align: center;
@@ -82,4 +84,3 @@ main {
     background-color: darken($albionBlack, 8);
   }
 }
-

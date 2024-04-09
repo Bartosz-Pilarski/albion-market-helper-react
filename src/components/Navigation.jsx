@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 const ResourceLink = ({ resource, location, currentTier }) => {
   return(
     <Link 
-    className={`${location === '/'+resource ? 'active' : ''} ${resource} resourceLink`} 
+    className={`${location === `/${resource}/${currentTier}` ? 'active' : ''} ${resource} resourceLink`} 
     to={`/${resource}/${currentTier}`}
     >
       {resource.charAt(0).toUpperCase()+resource.slice(1)}

@@ -1,0 +1,24 @@
+.resource-navigation {
+  background-color: darken($albionBlack, 5);
+  color: rgba($color: $albionWhite, $alpha: 0.5);
+  padding: 1rem 2rem;
+
+  ul {
+    font-size: larger;
+    list-style: none;
+    padding: 1rem 1rem;
+    li {
+      .link-wrapper {
+        padding: 0.25rem;
+        background-color: $albionBlack;
+      }
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      margin-bottom: 0.5rem;
+      a {
+        text-decoration: none;
+        color: $albionWhite;
+      }
+    }
+  }
+}

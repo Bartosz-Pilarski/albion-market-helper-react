@@ -1,24 +1,22 @@
-import { useSelector } from 'react-redux'
-import './Navigation.scss'
-
 import { Link, useLocation } from 'react-router-dom'
 
-const ResourceLink = ({ resource, location, currentTier }) => {
+import './Navigation.scss'
+import { resources } from '../util/maps'
+
+const ResourceLink = ({ resource, location }) => {
+  const lowercase = resource.toLowerCase()
   return(
     <Link 
-    className={`${location === `/${resource}/${currentTier}` ? 'active' : ''} ${resource} resourceLink`} 
-    to={`/${resource}/${currentTier}`}
+    className={`${location === `/${lowercase}` ? 'active' : ''} ${lowercase} resourceLink`} 
+    to={`/${lowercase}`}
     >
-      {resource.charAt(0).toUpperCase()+resource.slice(1)}
+      {resource.charAt(0)+lowercase.slice(1)}
     </Link>
   )
 }
 
 const Navigation = () => {
   const location = useLocation().pathname
-  const currentTier = useSelector((state) => state.tier)
-
-  const resources = ['metal', 'wood', 'fiber', 'stone', 'hide']
 
   return(
     <nav className='main-navigation'>
@@ -32,8 +30,8 @@ const Navigation = () => {
       </Link>
       <div className="separator"></div>
       {
-        resources.map(
-          (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} location={location} currentTier={currentTier} /> 
+        Object.keys(resources).map(
+          (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} location={location} /> 
         )
       }
     </nav>

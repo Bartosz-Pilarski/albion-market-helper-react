@@ -1,7 +1,11 @@
+/* MAIN COLORS */
+
 $albionRed: #a72725;
 $albionWhite: #FFFFFF;
 $albionBlack: #291f1f;
 $albionGrey: #979694;
+
+/* ITEM TIER COLORS */
 
 @use 'sass:map';
 $tier-colors: (
@@ -36,16 +40,72 @@ $tier7Dark: #C0A23D;
 $tier8Light: #F4F4F4;
 $tier8Dark: #CECECE;
 
+/* CITY COLORS */
+
+$martlockOuter: #406992;
+$martlockInner: #ECBB88;
+$bridgewatchOuter: #D86E27;
+$bridgewatchInner: #ffd768;
+$lymhurstOuter: #3c5218; 
+$lymhurstInner: #a3ca47;
+$fortsterlingOuter: #D0CFC4;
+$fortsterlingInner: #4a5155;
+$thetfordOuter: #4C2B51;
+$thetfordInner: #db83af;
+$caerleonOuter: #1F120C;
+$caerleonInner: #af3a40;
+
+.martlock {
+  color: $martlockInner;
+  background-color: $martlockOuter;
+}
+.bridgewatch {
+  color: $bridgewatchInner;
+  background-color: $bridgewatchOuter;
+}
+.lymhurst {
+  color: $lymhurstInner;
+  background-color: $lymhurstOuter;
+}
+.fortsterling {
+  color: $fortsterlingInner;
+  background-color: $fortsterlingOuter;
+}
+.thetford {
+  color: $thetfordInner;
+  background-color: $thetfordOuter;
+}
+.caerleon {
+  color: $caerleonInner;
+  background-color: $caerleonOuter;
+}
+
+/* UI SEPARATOR (as in the navbar) */
+
 .separator {
   border-bottom: 2px solid $albionRed;
   margin: 1rem 0.5rem 0
 }
 
+/* AUTO-GENERATE TIER CLASSES */
+
 @for $tier from 2 through 8 {
   .tier#{$tier}-background {
     background-image: linear-gradient(to right, map.get($tier-colors, 'tier'+$tier+'Light'), map.get($tier-colors, 'tier'+$tier+'Dark'));
+    &:hover {
+      div {
+        background-image: linear-gradient(to right, rgba(map.get($tier-colors, 'tier'+$tier+'Light'), 0.5), rgba(map.get($tier-colors, 'tier'+$tier+'Dark'), 0.9));
+      }
+    }
+  }
+  .tier#{$tier}-active {
+    div {
+      background-image: linear-gradient(to right, rgba(map.get($tier-colors, 'tier'+$tier+'Light'), 0.5), rgba(map.get($tier-colors, 'tier'+$tier+'Dark'), 0.9));
+    }
   }
 }
+
+/* TEXT HIGHLIGHT */
 
 .highlight {
   color: $albionRed;

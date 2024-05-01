@@ -1,21 +1,29 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import './Navigation.scss'
 import { resources } from '../util/maps'
 
-const ResourceLink = ({ resource, location }) => {
+const ResourceLink = ({ resource, searchParams, navigate }) => {
   const lowercase = resource.toLowerCase()
+  const tier = searchParams.get('tier') || 4
   return(
-    <Link 
-    className={`${location === `/${lowercase}` ? 'active' : ''} ${lowercase} resourceLink`} 
-    to={`/${lowercase}`}
+    <a 
+    className={`${searchParams.get('type') === lowercase ? 'active' : ''} ${lowercase} resourceLink`} 
+    onClick={() => {
+      navigate({
+        pathname: '/refine',
+        search: `?type=${lowercase}&tier=${tier}`
+      })
+    }}
     >
       {resource.charAt(0)+lowercase.slice(1)}
-    </Link>
+    </a>
   )
 }
 
 const Navigation = () => {
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const location = useLocation().pathname
 
   return(
@@ -31,7 +39,7 @@ const Navigation = () => {
       <div className="separator"></div>
       {
         Object.keys(resources).map(
-          (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} location={location} /> 
+          (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} searchParams={searchParams} navigate={navigate} /> 
         )
       }
     </nav>

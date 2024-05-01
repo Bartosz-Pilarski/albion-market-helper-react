@@ -1,35 +1,37 @@
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
 import './ResourceNavigation.scss'
-import { changeTier } from '../reducers/tierReducer'
 import { numberToNumeral } from '../util/maps'
 
-const ResourceLink = ({ tier }) => {
-  const currentTier = useSelector((state) => state.tier)
-  const dispatch = useDispatch()
-
+const ResourceLink = ({ type, tier, currentTier, navigate }) => {
   const handleClick = (tier) => {
-    dispatch(changeTier(tier))
+    navigate({
+      pathname: `/refine`,
+      search: `?type=${type}&tier=${tier}`
+    })
   }
 
   return(
     <li className={currentTier === tier ? `tier${tier}-background tier${tier}-active` : `tier${tier}-background`}>
     <div onClick={() => handleClick(tier)} className='link-wrapper'>
-        <Link  className={`tier${tier}`}> Tier {numberToNumeral[tier]} </Link>
+        <Link className={`tier${tier}`}> Tier {numberToNumeral[tier]} </Link>
     </div>
   </li>
   )
 }
 
 const ResourceNavigation = () => {
+  const [searchParams] = useSearchParams()
+  const resourceType = searchParams.get('type')
+  const currentTier = searchParams.get('tier')
+  const navigate = useNavigate()
   return(
     <nav className='resource-navigation'>
       <p>
         Pick your desired resource tier:
       </p>
       <ul>
-        {Object.keys(numberToNumeral).map((tier) => <ResourceLink key={`tier-${tier}`} tier={ tier } />)}
+        {Object.keys(numberToNumeral).map((tier) => <ResourceLink key={`tier-${tier}`} type={resourceType} tier={tier} currentTier={currentTier} navigate={navigate} />)}
       </ul>
       
     </nav>

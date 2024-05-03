@@ -28,7 +28,7 @@ const ResourceView = () => {
       ? <>
         <h1> {resourceType} Refining </h1>
         <ResourcePanel resourceInfo={relevantPrices.raw} isRefined={false} />
-        <ResourceCalculator prices={relevantPrices} />
+        <ResourceCalculator relevantPrices={relevantPrices} allPrices={prices} />
         <ResourcePanel resourceInfo={relevantPrices.refined} isRefined={true} />
       </> 
       : <> Loading </>}

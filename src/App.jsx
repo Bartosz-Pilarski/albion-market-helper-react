@@ -7,12 +7,14 @@ import Home from "./components/Home.jsx"
 import ResourceView from "./components/ResourceView.jsx"
 
 import { initializePrices } from "./reducers/pricesReducer.js"
+import { initializeRecipes } from "./reducers/refiningReducer.js"
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializePrices())
+    dispatch(initializeRecipes())
   }, [])
 
   return (

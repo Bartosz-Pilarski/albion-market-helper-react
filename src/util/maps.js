@@ -31,6 +31,39 @@ const resources = {
   }
 }
 
+const resourcesReverse = {
+  METALBAR: {
+    TYPE: 'METAL'
+  },
+  ORE: {
+    TYPE: 'METAL'
+  },
+  WOOD: {
+    TYPE: 'WOOD'
+  },
+  PLANKS: {
+    TYPE: 'WOOD'
+  },
+  FIBER: {
+    TYPE: 'FIBER'
+  },
+  CLOTH: {
+    TYPE: 'FIBER'
+  },
+  ROCK: {
+    TYPE: 'STONE'
+  },
+  STONEBLOCK: {
+    TYPE: 'STONE'
+  },
+  HIDE: {
+    TYPE: 'HIDE'
+  },
+  LEATHER: {
+    TYPE: 'HIDE'
+  }
+}
+
 const translateLocation = {
   'Bridgewatch': { 
     classname: 'bridgewatch',
@@ -61,5 +94,6 @@ const translateLocation = {
 export {
   numberToNumeral,
   resources,
+  resourcesReverse,
   translateLocation
 }

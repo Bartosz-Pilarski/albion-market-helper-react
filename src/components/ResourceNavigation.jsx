@@ -42,10 +42,12 @@ const ResourceNavigation = () => {
       <p>
         Pick your desired resource tier:
       </p>
-      <ul>
-        {Object.keys(numberToNumeral).map((tier) => <ResourceLink key={`tier-${tier}`} type={resourceType} tier={tier} currentTier={currentTier} navigate={navigate} />)}
-      </ul>
-      
+      <div className="separator"></div>
+      <div>
+        <ul>
+          {Object.keys(numberToNumeral).map((tier) => <ResourceLink key={`tier-${tier}`} type={resourceType} tier={tier} currentTier={currentTier} navigate={navigate} />)}
+        </ul>
+      </div>
     </nav>
   )
 }

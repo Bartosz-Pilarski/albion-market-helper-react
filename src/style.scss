@@ -28,6 +28,17 @@ main {
 .resource-view {
   display: flex;
   flex-direction: row;
+  .resource-view-details-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .resource-view-details {
+      display: flex;
+      flex-direction: row;
+      margin: 0 auto;
+    }
+  }
+
 }
 
 #home {

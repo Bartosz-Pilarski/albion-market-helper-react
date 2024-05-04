@@ -8,6 +8,7 @@ import ResourceView from "./components/ResourceView.jsx"
 
 import { initializePrices } from "./reducers/pricesReducer.js"
 import { initializeRecipes } from "./reducers/refiningReducer.js"
+import ResourceNavigation from "./components/ResourceNavigation.jsx"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -19,10 +20,9 @@ const App = () => {
 
   return (
     <main>
-      <Navigation />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/refine" element={<ResourceView />} />
+        <Route path="/" element={<> <Navigation /> <Home/> </>} />
+        <Route path="/refine" element={<> <Navigation /> <ResourceNavigation /> <ResourceView /> </>} />
       </Routes>
     </main>
   )

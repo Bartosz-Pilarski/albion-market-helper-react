@@ -1,8 +1,30 @@
 .resource-navigation {
-  background-color: darken($albionBlack, 5);
-  color: rgba($color: $albionWhite, $alpha: 0.5);
+  position: sticky;
+  top: 0;
+
+  width: 15rem;
+  height: 100vh;
   padding: 1rem 2rem;
 
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  overflow-y: scroll;
+  &::--webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  background-color: darken($albionBlack, 5);
+  color: rgba($color: $albionWhite, $alpha: 0.5);
+
+  p {
+    margin: -1rem -2rem;
+    padding: 1rem 0.5rem 0.5rem;
+    text-align: center;
+  }
   ul {
     font-size: larger;
     list-style: none;

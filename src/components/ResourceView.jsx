@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
-import ResourceNavigation from "./ResourceNavigation"
 import ResourcePanel from "./ResourcePanel"
-import ResourceCalculator from "./ResourceCalculator"
+import ResourceCalculator from "./ResourceCalculator/ResourceCalculator"
 import { useSearchParams } from "react-router-dom"
 
 /**
@@ -27,14 +26,16 @@ const ResourceView = () => {
 
   return(
     <div style={{color: 'white'}} className="main-view resource-view">
-      <ResourceNavigation />
+
       {relevantPrices 
-      ? <>
+      ? <div className='resource-view-details-wrapper'>
         <h1> {resourceType} Refining </h1>
-        <ResourcePanel resourceInfo={relevantPrices.raw} isRefined={false} />
-        <ResourceCalculator relevantPrices={relevantPrices} allPrices={prices} />
-        <ResourcePanel resourceInfo={relevantPrices.refined} isRefined={true} />
-      </> 
+        <div className='resource-view-details'>
+          <ResourcePanel resourceInfo={relevantPrices.raw} isRefined={false} />
+          <ResourceCalculator relevantPrices={relevantPrices} allPrices={prices} />
+          <ResourcePanel resourceInfo={relevantPrices.refined} isRefined={true} />
+        </div>
+      </div> 
       : <> Loading </>}
 
     </div>

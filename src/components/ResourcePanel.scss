@@ -1,0 +1,51 @@
+.resource-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: $albionWhite;
+  background-color: $albionBlack;
+
+  border: 3px solid $albionRed;
+  border-radius: 0.5rem; 
+
+  padding: 1rem; 
+  margin: 1rem;
+
+  width: 17.5rem;
+
+  .resource-panel-icon {
+    margin-top: -1rem;
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+  .resource-panel-titles {
+    text-align: center;
+    .resource-panel-title {
+      margin: -1.25rem 0;
+    }
+    .resource-panel-subtitle {
+      font-weight: normal;
+    }
+  }
+
+  .resource-panel-prices {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    .resource-panel-prices-buy, .resource-panel-prices-sell {
+      p {
+        padding: 0.25rem;
+      }
+      ul {
+        li {
+          border-radius: 0.25rem;
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+          list-style-type: none;
+        }
+      }
+    }
+  }
+}

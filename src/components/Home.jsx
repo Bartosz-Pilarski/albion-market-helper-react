@@ -2,6 +2,10 @@ import sectionOneImage from '../images/section1.png'
 import sectionTwoImage from '../images/section2.png'
 import sectionThreeImage from '../images/section3.png'
 
+/**
+ * A view for displaying the homepage. Shown by default.
+ * @component
+ */
 const Home = () => {
   return(
     <div id="home" className='main-view'>

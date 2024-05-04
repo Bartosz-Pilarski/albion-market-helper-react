@@ -1,6 +1,10 @@
 import { getImageHref } from "../util/images"
 import { translateLocation } from "../util/maps"
 
+/**
+ * Panel displaying basic resource info, an icon and the relevant prices
+ * @component
+ */
 const ResourcePanel = ({ resourceInfo }) => {
   return (
     <div className='resourcePanel' style={{border: '2px solid white', padding: '1rem', margin: '1rem', width: '15rem'}}>

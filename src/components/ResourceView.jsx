@@ -6,6 +6,10 @@ import ResourcePanel from "./ResourcePanel"
 import ResourceCalculator from "./ResourceCalculator"
 import { useSearchParams } from "react-router-dom"
 
+/**
+ * View replacing homepage, displays ResourcePanels and a ResourceCalculator. Based on current searchParams.
+ * @component
+ */
 const ResourceView = () => {
   const [searchParams] = useSearchParams()
   const resourceType = searchParams.get('type')

@@ -3,11 +3,16 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import './Navigation.scss'
 import { resources } from '../util/maps'
 
+/**
+ * Navigation component for picking a resource type or going back to the homepage
+ * @component
+ */
 const ResourceLink = ({ resource, searchParams, navigate }) => {
   const lowercase = resource.toLowerCase()
   const tier = searchParams.get('tier') || 4
   return(
-    <a 
+    <a
+    //Check to apply a fancy class for marking selection
     className={`${searchParams.get('type') === lowercase ? 'active' : ''} ${lowercase} resourceLink`} 
     onClick={() => {
       navigate({
@@ -16,6 +21,7 @@ const ResourceLink = ({ resource, searchParams, navigate }) => {
       })
     }}
     >
+      {/*Construct a resource name with only the first letter being capitalized*/}
       {resource.charAt(0)+lowercase.slice(1)}
     </a>
   )
@@ -29,6 +35,7 @@ const Navigation = () => {
   return(
     <nav className='main-navigation'>
       <Link 
+        //If at home page
         className={location === '/' ? 'active' : ''} 
         to={'/'}
         >

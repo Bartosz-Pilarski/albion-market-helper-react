@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useMemo } from "react"
 import { useSelector } from "react-redux"
+import { useSearchParams } from "react-router-dom"
 
 import ResourcePanel from "./ResourcePanel"
 import ResourceCalculator from "./ResourceCalculator/ResourceCalculator"
-import { useSearchParams } from "react-router-dom"
+import { capitalizeFirstLetter } from "../util/util"
 
 /**
  * View replacing homepage, displays ResourcePanels and a ResourceCalculator. Based on current searchParams.
@@ -11,28 +12,27 @@ import { useSearchParams } from "react-router-dom"
  */
 const ResourceView = () => {
   const [searchParams] = useSearchParams()
-  const resourceType = searchParams.get('type')
-  const tier = searchParams.get('tier')
+  const tier = parseInt(searchParams.get('tier'))
+  const type = searchParams.get('type')
   const prices = useSelector((state) => state.prices)
 
-  const filterPrices = (prices, tier) => prices.find((resource) => resource.tier === tier && resource.type === resourceType.toUpperCase())
-  const [relevantPrices, setRelevantPrices] = useState(filterPrices(prices, tier))
-
-  useEffect(() => {
-    //to prevent an extra rerender
-    const filterPrices = (prices, tier) => prices.find((resource) => resource.tier === tier && resource.type === resourceType.toUpperCase())
-    setRelevantPrices(filterPrices(prices, parseInt(tier)))
-  }, [tier, prices, relevantPrices, resourceType])
+  const relevantPrices = useMemo(
+    () => {
+      const filteredPrices = prices.find((resource) => resource.tier === tier && resource.type === type.toUpperCase())
+      return filteredPrices
+    },
+    [prices, tier, type]
+  )
 
   return(
     <div style={{color: 'white'}} className="main-view resource-view">
 
       {relevantPrices 
       ? <div className='resource-view-details-wrapper'>
-        <h1> {resourceType} Refining </h1>
+        <h1> {capitalizeFirstLetter(type)} Refining </h1>
         <div className='resource-view-details'>
           <ResourcePanel resourceInfo={relevantPrices.raw} isRefined={false} />
-          <ResourceCalculator relevantPrices={relevantPrices} allPrices={prices} />
+          <ResourceCalculator key={`${tier}-${type}-calc`} relevantPrices={relevantPrices} />
           <ResourcePanel resourceInfo={relevantPrices.refined} isRefined={true} />
         </div>
       </div> 

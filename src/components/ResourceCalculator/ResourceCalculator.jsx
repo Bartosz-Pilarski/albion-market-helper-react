@@ -8,9 +8,10 @@ import { BuyAndSellPanel, NutritionCalculator, RecipeBreakdown, ResourceInputs }
  * Component for calculating the costs, profits, inputs etc. of refining resources.
  * @component
  */
-const ResourceCalculator = ({ relevantPrices, allPrices }) => {
+const ResourceCalculator = ({ relevantPrices }) => {
   const [searchParams] = useSearchParams()
   const recipes = useSelector((state) => state.refining)
+  const allPrices = useSelector((state) => state.prices)
 
   const requestedTier = parseInt(searchParams.get('tier'))
   const requestedType = searchParams.get('type').toUpperCase()
@@ -30,6 +31,7 @@ const ResourceCalculator = ({ relevantPrices, allPrices }) => {
       let catalyst = recipe.CATALYST[0]
       if(!catalyst) return [false, undefined]
 
+      console.log(relevantPrices)
       const refiningCatalyst = allPrices.find(
           (price) => price.tier === parseInt(catalyst.charAt(1)) && price.type === resourcesReverse[catalyst.slice(3)].TYPE
         ).refined 

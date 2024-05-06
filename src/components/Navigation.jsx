@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 
 import './Navigation.scss'
 import { resources } from '../util/maps'
+import { capitalizeFirstLetter } from '../util/util'
 
 /**
  * Navigation component for picking a resource type or going back to the homepage
@@ -22,7 +23,7 @@ const ResourceLink = ({ resource, searchParams, navigate }) => {
     }}
     >
       {/*Construct a resource name with only the first letter being capitalized*/}
-      {resource.charAt(0)+lowercase.slice(1)}
+      {capitalizeFirstLetter(resource)}
     </a>
   )
 }

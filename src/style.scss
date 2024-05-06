@@ -32,13 +32,26 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
+    .resource-view-header {
+      text-align: center;
+      font-size: 4rem;
+      color: $albionWhite;
+      text-shadow: $albionWhite 0px 0px 3px;
+      margin: 3rem 0;
+    }
     .resource-view-details {
       display: flex;
       flex-direction: row;
-      margin: 0 auto;
+      justify-content: space-around;
+
+      border-top: 4px solid $albionRed;
+      background-color: rgba(lighten($albionBlack, 2), 0.75);
+
+      height: 100%;
+      
+      padding: 2rem;
     }
   }
-
 }
 
 #home {

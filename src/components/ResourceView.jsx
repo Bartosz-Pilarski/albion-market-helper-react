@@ -29,7 +29,9 @@ const ResourceView = () => {
 
       {relevantPrices 
       ? <div className='resource-view-details-wrapper'>
-        <h1> {capitalizeFirstLetter(type)} Refining </h1>
+        <h1 className='resource-view-header'>
+          {capitalizeFirstLetter(type)} Refining
+        </h1>
         <div className='resource-view-details'>
           <ResourcePanel resourceInfo={relevantPrices.raw} isRefined={false} />
           <ResourceCalculator key={`${tier}-${type}-calc`} relevantPrices={relevantPrices} />

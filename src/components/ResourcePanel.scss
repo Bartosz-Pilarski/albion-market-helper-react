@@ -5,15 +5,16 @@
   align-items: center;
 
   color: $albionWhite;
-  background-color: $albionBlack;
+  background-color: darken($albionBlack, 3);
 
-  border: 3px solid $albionRed;
+  border-top: 3px solid $albionRed;
   border-radius: 0.5rem; 
 
   padding: 1rem; 
   margin: 1rem;
 
   width: 17.5rem;
+  height: 28rem;
 
   .resource-panel-icon {
     margin-top: -1rem;

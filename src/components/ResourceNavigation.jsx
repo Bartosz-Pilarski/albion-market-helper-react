@@ -39,7 +39,7 @@ const ResourceNavigation = () => {
   
   return(
     <nav className='resource-navigation'>
-      <p>
+      <p className='dimmed'>
         Pick your desired resource tier:
       </p>
       <div className="separator"></div>

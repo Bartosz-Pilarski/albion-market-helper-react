@@ -2,20 +2,39 @@ import { translateLocation } from "../../util/maps"
 import { handleFocus } from "../../util/util"
 
 /**
+ * Subcomponent for BuyAndSellPanel, takes either of the bestPrices values
+ * @component
+ */
+const BuyAndSellPlate = ({ price, isRefined }) => {
+  return isRefined
+    ? (
+    <div className='resource-calculator-refined'>
+      <p> Selling at: </p>
+      <h1 className={translateLocation[price.location].classname}> {price.location} </h1>
+      <h2> for {price.price} silver each </h2>
+    </div>
+    )
+    : (
+    <div className='resource-calculator-raw'>
+      <p> Buying at: </p>
+      <h1 className={translateLocation[price.location].classname}> {price.location} </h1>
+      <h2> for {price.price} silver each </h2>
+    </div>
+    )
+}
+
+/**
  * Displays which location's prices the refining will be based on clearly
  * @component
  */
 const BuyAndSellPanel = ({ bestPrices }) => {
+  if(!bestPrices) return (<></>)
+  console.log(bestPrices.raw)
   return(
     <div className="resource-calculator-prices">
-      <div className='resource-calculator-raw'>
-        <h2> Buying from: <span className={translateLocation[bestPrices.raw.location].classname}> {bestPrices.raw.location} </span> </h2>
-        <div> for {bestPrices.raw.price} silver each</div>
-      </div>
-      <div className='resourceCalculator-refined'>
-        <h2> Selling at: <span className={translateLocation[bestPrices.refined.location].classname}> {bestPrices.refined.location} </span> </h2>
-        <div> for {bestPrices.refined.price} silver each </div>
-      </div>
+      <BuyAndSellPlate price={bestPrices.raw} isRefined={false} />
+      <div className="arrow-right"></div>
+      <BuyAndSellPlate price={bestPrices.refined} isRefined={true} />
     </div>
   )
 }
@@ -62,33 +81,46 @@ const NutritionCalculator = ({ nutritionCost, setNutritionCost }) => {
  */
 const ResourceInputs = ({ resourceInput, setResourceInput, resourceOutput, setResourceOutput, recipe }) => {
   return(
-    <div className="resource-calculator-inputs">
-      <span>Resource input: </span>
-      <input
-        type='number'
-        value={resourceInput}
-        onFocus={(event) => handleFocus(event)}
-        onChange={(event) => {
-          const newValue = parseInt(event.target.value)
-          if(isNaN(newValue)) return
-          setResourceInput(event.target.value)
-          //Calculate resource output based on the ratio of raw to refined resource in the recipe
-          setResourceOutput(Math.floor(event.target.value/recipe.RESOURCE[1]))
-        }}
-      />
-      <span>Resource output: </span>
-      <input
-        type='number'
-        value={resourceOutput}
-        onFocus={(event) => handleFocus(event)}
-        onChange={(event) => {
-          const newValue = parseInt(event.target.value)
-          if(isNaN(newValue)) return
-          setResourceOutput(event.target.value)
-          //Calculate resource input based on the ratio of raw to refined resource in the recipe
-          setResourceInput(event.target.value*recipe.RESOURCE[1])
-        }}
-      />
+    <div className="resource-calculator-inputs-wrapper">
+      <p>Enter your desired input or output:</p>
+      
+      <div className="resource-calculator-inputs">
+        <div className="resource-calculator-input">
+          <span> Input </span>
+          <input
+            type='number'
+            value={resourceInput}
+            onFocus={(event) => handleFocus(event)}
+            onChange={(event) => {
+              const newValue = parseInt(event.target.value)
+              if(isNaN(newValue)) return
+              setResourceInput(event.target.value)
+              //Calculate resource output based on the ratio of raw to refined resource in the recipe
+              setResourceOutput(Math.floor(event.target.value/recipe.RESOURCE[1]))
+            }}
+          />
+        </div>
+
+        <div className="arrow-right-small"></div>
+
+        <div className="resource-calculator-output">
+          <input
+            type='number'
+            value={resourceOutput}
+            onFocus={(event) => handleFocus(event)}
+            onChange={(event) => {
+              const newValue = parseInt(event.target.value)
+              if(isNaN(newValue)) return
+              setResourceOutput(event.target.value)
+              //Calculate resource input based on the ratio of raw to refined resource in the recipe
+              setResourceInput(event.target.value*recipe.RESOURCE[1])
+            }}
+          />
+          <span> Output </span>
+        </div>
+      </div>
+      
+      <p className='resource-calculator-ratio'> <span className='dimmed'>Raw to refined resource ratio for this recipe is </span> <br /> <span className='highlight'> {recipe.RESOURCE[1]}:1 </span></p>
     </div>
   )
 }

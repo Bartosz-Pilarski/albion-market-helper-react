@@ -1,0 +1,53 @@
+.resource-calculator {
+  border-top: 3px solid $albionRed;
+  border-radius: 0.5rem; 
+
+  width: 35rem;
+
+  padding: 1rem;
+  background-color: $albionBlack;
+
+  text-align: center;
+
+  .separator {
+    margin: 1rem;
+  }
+
+  .resource-calculator-nutrition {
+    input[type='number'] {
+      width: 4rem;
+    }
+  }
+
+  .resource-calculator-prices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0.5rem;
+    gap: 1rem;
+  }
+
+  .resource-calculator-inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .resource-calculator-inputs {
+      display: flex;
+      flex-direction: row;
+      .resource-calculator-input, .resource-calculator-output {
+        margin: 0 auto;
+      }
+    }
+    .resource-calculator-ratio {
+      .highlight {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .resource-calculator-recipe {
+    text-align: left;
+  }
+}
+

@@ -1,8 +1,10 @@
 import { useState, useMemo, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
+
 import { resourcesReverse } from "../../util/maps"
 import { BuyAndSellPanel, NutritionCalculator, RecipeBreakdown, ResourceInputs } from "./Subcomponents"
+import './ResourceCalculator.scss'
 
 /**
  * Component for calculating the costs, profits, inputs etc. of refining resources.
@@ -31,7 +33,6 @@ const ResourceCalculator = ({ relevantPrices }) => {
       let catalyst = recipe.CATALYST[0]
       if(!catalyst) return [false, undefined]
 
-      console.log(relevantPrices)
       const refiningCatalyst = allPrices.find(
           (price) => price.tier === parseInt(catalyst.charAt(1)) && price.type === resourcesReverse[catalyst.slice(3)].TYPE
         ).refined 
@@ -98,14 +99,16 @@ const ResourceCalculator = ({ relevantPrices }) => {
   return (
   <div className='resource-calculator'>
     <BuyAndSellPanel bestPrices={bestPrices} />
-
+    <div className="separator"></div>
     <div className="resource-calculator-calculator">
       <NutritionCalculator nutritionCost={nutritionCost} setNutritionCost={setNutritionCost} />
+      <div className="separator"></div>
       <ResourceInputs 
         resourceInput={resourceInput} setResourceInput={setResourceInput} 
         resourceOutput={resourceOutput} setResourceOutput={setResourceOutput} 
         recipe={recipe} 
       />
+      <div className="separator"></div>
       <RecipeBreakdown 
         resourceInput={resourceInput} resourceOutput={resourceOutput}
         refiningCatalyst={refiningCatalyst} refiningCatalystRequired={refiningCatalystRequired}

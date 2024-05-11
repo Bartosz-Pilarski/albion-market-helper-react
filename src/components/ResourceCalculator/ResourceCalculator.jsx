@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
 
-import { resourcesReverse } from "../../util/maps"
+import { resourceReturnRates, resourcesReverse } from "../../util/maps"
 import { BuyAndSellPanel, NutritionCalculator, RecipeBreakdown, ResourceInputs } from "./Subcomponents"
 import './ResourceCalculator.scss'
 
@@ -83,10 +83,16 @@ const ResourceCalculator = ({ relevantPrices }) => {
     [relevantPrices, refiningCatalystRequired, refiningCatalyst]
   )
 
-
+  //Usage cost per 100 nutrition used
   const [nutritionCost, setNutritionCost] = useState(100)
+  //Raw resource input, refined reosurce output
   const [resourceInput, setResourceInput] = useState(recipe.RESOURCE[1])
   const [resourceOutput, setResourceOutput] = useState(1)
+  const [isFocusUsed, setisFocusUsed] = useState(false)
+  // False - free 2 play tax, true - premium tax
+  const [isTaxDiscounted, setIsTaxDiscounted] = useState(false)
+  //
+  const [resourceReturnRate, setResourceReturnRate] = useState(resourceReturnRates.cityBonus)
 
   //Update resource calculations to correctly display the required resource inputs, while keeping the desired output, every time tier is changed
   useEffect(() => {
@@ -109,9 +115,52 @@ const ResourceCalculator = ({ relevantPrices }) => {
         recipe={recipe} 
       />
       <div className="separator"></div>
+      <div className="resource-calculator-extras">
+        <div className="resource-calculator-taxes">
+          <p>Tax:</p>
+          <input 
+            type="radio" 
+            name="tax" id="tax-f2p" 
+            checked={!isTaxDiscounted}
+            onChange={() => setIsTaxDiscounted(false)}
+            />
+          <label htmlFor="tax-f2p">8.5%</label>
+          <input 
+            type="radio" 
+            name="tax" id="tax-premium" 
+            checked={isTaxDiscounted}
+            onChange={() => setIsTaxDiscounted(true)}
+            />
+          <label htmlFor="tax-premium">5.5%</label>
+        </div>
+        <div className="resource-calculator-rrr">
+          <p>Resource Return Rate:</p>
+          <select 
+            name="rrr-dropdown" id="rrr-dropdown"
+            onChange={(event) => setResourceReturnRate(JSON.parse(event.target.value)) }
+          >
+            <option value={ JSON.stringify(resourceReturnRates.cityBonus) }  >Royal City w/ Bonus </option>
+            <option value={ JSON.stringify(resourceReturnRates.city) }       >Royal City </option>
+            <option value={ JSON.stringify(resourceReturnRates.islandBonus) }>Royal Island w/ Bonus </option>
+            <option value={ JSON.stringify(resourceReturnRates.island) }     >Royal Island </option>
+            <option value={ JSON.stringify(resourceReturnRates.hideout) }    >Hideout </option>
+          </select>
+          <br />
+          <label htmlFor="focus-used"> Refining with focus? </label>
+          <input 
+            type="checkbox" 
+            name="focus" id="focus-used" 
+            checked={isFocusUsed}
+            onChange={(event) => setisFocusUsed(event.target.checked)}
+          />
+        </div>
+      </div>
+      <div className="separator"></div>
       <RecipeBreakdown 
         resourceInput={resourceInput} resourceOutput={resourceOutput}
         refiningCatalyst={refiningCatalyst} refiningCatalystRequired={refiningCatalystRequired}
+        isFocusUsed={isFocusUsed} resourceReturnRate={resourceReturnRate}
+        isTaxDiscounted={isTaxDiscounted}
         relevantPrices={relevantPrices} bestPrices={bestPrices}
         recipe={recipe}
         nutritionCost={nutritionCost}

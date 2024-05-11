@@ -48,6 +48,42 @@
   }
   .resource-calculator-recipe {
     text-align: left;
+    .resource-calculator-recipe-input {
+      table {
+        margin: 0 auto;
+        padding: 0.15rem;
+        border-top: solid 2px $albionRed;
+        border-radius: 0.5rem 0.5rem 0 0;
+        * {
+          padding: 0.15rem;
+        }
+      }
+      tbody tr:nth-of-type(odd) {
+        background-color: lighten($albionBlack, 5);
+      }
+      tbody tr:last-of-type {
+        background-color: $albionRed;
+      }
+    }
+  }
+  .resource-calculator-recipe-output {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 5rem;
+  }
+  .resource-calculator-profit {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 0.2rem;
+    span {
+      border-radius: 0.25rem;
+      padding: 0.1rem;
+    }
+  }
+  .resource-calculator-recipe-header {
+    font-weight: bold;
   }
 }
 

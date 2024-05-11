@@ -29,7 +29,6 @@ const BuyAndSellPlate = ({ price, isRefined }) => {
  */
 const BuyAndSellPanel = ({ bestPrices }) => {
   if(!bestPrices) return (<></>)
-  console.log(bestPrices.raw)
   return(
     <div className="resource-calculator-prices">
       <BuyAndSellPlate price={bestPrices.raw} isRefined={false} />
@@ -130,28 +129,112 @@ const ResourceInputs = ({ resourceInput, setResourceInput, resourceOutput, setRe
  * TODO: handle taxes and RRR
  * @component
  */
-const RecipeBreakdown = ({ resourceInput, resourceOutput, relevantPrices, bestPrices, refiningCatalyst, refiningCatalystRequired, recipe, nutritionCost }) => {
+const RecipeBreakdown = ({ 
+    resourceInput, resourceOutput, 
+    relevantPrices, bestPrices, 
+    refiningCatalyst, refiningCatalystRequired, 
+    recipe, nutritionCost,
+    isFocusUsed, resourceReturnRate,
+    isTaxDiscounted
+  }) => {
   const resourceHumanName = relevantPrices.raw.subtitle
   const catalystHumanName = refiningCatalystRequired ? refiningCatalyst.subtitle : ''
+  const taxHumanName = isTaxDiscounted ? '5.5%' : '8.5%'
+  const rrrHumanName = isFocusUsed ? (resourceReturnRate.focus*100).toFixed(1)+'%' : (resourceReturnRate.normal*100).toFixed(1)+'%'
 
-  const calculatedNutritionCost = Math.floor((recipe.NUTRITION*nutritionCost)/100)*resourceOutput
+  const tax = isTaxDiscounted ? 0.055 : 0.085
+  const rrr = isFocusUsed ? resourceReturnRate.focus : resourceReturnRate.normal
+
+  const calculatedBuyPrice = refiningCatalystRequired 
+    ? (resourceInput*bestPrices.raw.price) + (resourceOutput*bestPrices.catalyst.price)
+    : resourceInput*bestPrices.raw.price
+
+  const calculateFinalSellPrice = () => {
+    let approxRRR = parseInt(resourceOutput)*rrr
+    let total = approxRRR
+    for (let pass = 0; pass < 3; pass++) {
+      let returns = approxRRR*rrr
+      returns = Math.floor(returns)
+      approxRRR = returns
+      total += returns
+    }
+    total = Math.floor(total)
+    const approxTotalOutput = parseInt(resourceOutput)+total
+    const totalSellPrice = approxTotalOutput*bestPrices.refined.price
+    const totalNutritionCost = Math.floor((recipe.NUTRITION*nutritionCost)/100)*approxTotalOutput
+
+    return [totalSellPrice, totalNutritionCost, total]
+  }
+
+  const [calculatedSellPrice, calculatedNutritionCost, approxReturns] = calculateFinalSellPrice()
+  console.log(calculatedSellPrice)
+  const calculatedTax = Math.floor(calculatedSellPrice-(calculatedSellPrice*tax))
+  const calculatedProfit = calculatedSellPrice-calculatedTax-calculatedNutritionCost
 
   if(!refiningCatalystRequired) return(
     <div className="resource-calculator-recipe">
-      Resource: {resourceInput}x {resourceHumanName} - {resourceInput*bestPrices.raw.price} silver <br />
-      Tax: 8.5% <br />
-      Resource Return Rate: 15% <br />
-      Profit: {resourceOutput*bestPrices.refined.price-(resourceInput*bestPrices.raw.price)}
+      <div className="resource-calculator-recipe-output">
+        <div className="resource-calculator-simple-resource">
+        <span className="resource-calculator-recipe-header"> Resource: </span> {resourceInput}x {resourceHumanName} - {resourceInput*bestPrices.raw.price} silver <br />
+        </div>
+        <div className="resource-calculator-nutrition-output">
+          <span className="resource-calculator-recipe-header"> Resource Return Rate: </span> {rrrHumanName} ⇀ ~{approxReturns} extra item{approxReturns !== 1 ? 's' : ''} (+{approxReturns*bestPrices.raw.price} silver)
+        </div>
+        <div className="resource-calculator-recipe-tax">
+          <span className="resource-calculator-recipe-header"> Tax: </span> {taxHumanName} ({calculatedTax} silver)
+        </div>
+      </div>
+      <div className="resource-calculator-profit">
+       <span className={calculatedProfit > 0 ? 'profitable' : 'not-profitable'}> Profit: {calculatedSellPrice-calculatedTax} silver </span>
+      </div>
     </div>
   )
   else return (
     <div className="resource-calculator-recipe">
-      Resource: {resourceInput}x {resourceHumanName} - {resourceInput*bestPrices.raw.price} silver <br />
-      Catalyst: {resourceOutput}x {catalystHumanName} - {resourceOutput*bestPrices.catalyst.price} silver <br />
-      Nutrition cost: {calculatedNutritionCost} <br />
-      Tax: 8.5% <br />
-      Resource Return Rate: 15% <br />
-      Profit: {resourceOutput*bestPrices.refined.price-((resourceInput*bestPrices.raw.price)+resourceOutput*bestPrices.catalyst.price)-(Math.floor((recipe.NUTRITION/100)*nutritionCost)*resourceOutput)}
+      <div className="resource-calculator-recipe-input">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"> # </th>
+              <th scope="col"> Name </th>
+              <th scope="col"> Cost (Silver) </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> {resourceInput} </td>
+              <td> {resourceHumanName} </td>
+              <td> {resourceInput*bestPrices.raw.price} </td>
+            </tr>
+            <tr>
+              <td> {resourceOutput} </td>
+              <td> {catalystHumanName} </td>
+              <td> {resourceOutput*bestPrices.catalyst.price} </td>
+            </tr>
+            <tr>
+              <td colSpan={2} scope="row"> Nutrition cost </td>
+              <td> {calculatedNutritionCost} </td>
+            </tr>
+            <tr>
+              <th colSpan={2} scope="row"> Input total </th>
+              <td> {calculatedBuyPrice+calculatedNutritionCost} </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div className="resource-calculator-recipe-output">
+        <div className="resource-calculator-nutrition-output">
+          <span className="resource-calculator-recipe-header"> Resource Return Rate: </span> {rrrHumanName} ⇀ ~{approxReturns} extra item{approxReturns !== 1 ? 's' : ''} (+{approxReturns*bestPrices.raw.price} silver)
+        </div>
+        <div className="resource-calculator-recipe-tax">
+          <span className="resource-calculator-recipe-header"> Tax: </span> {taxHumanName} ({calculatedTax} silver)
+        </div>
+      </div>
+      <div className="resource-calculator-profit">
+       <span className={calculatedProfit > 0 ? 'profitable' : 'not-profitable'}> Profit: {calculatedProfit} silver </span>
+      </div>
     </div>
   )
 }

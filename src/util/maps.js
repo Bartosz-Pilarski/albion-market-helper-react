@@ -143,9 +143,47 @@ const translateLocation = {
   },
 }
 
+/**
+ * Associative array storing the Resource Return Rates (RRRs) of various refining locations, in pairs of normal and focus values - for refining with and without focus respectively.
+ * @typedef {Object} resourceReturnRates 
+ * @property {RRR} city - Royal city without a specialized refining bonus for the resource
+ * @property {RRR} cityBonus - Royal city specializing in said resource
+ * @property {RRR} island - Player-owned island in a non-specialized city
+ * @property {RRR} islandBonus - Player-owned island in a city specializing in said resource
+ * @property {RRR} hideout - Black Zone guild Hideout
+ */
+/**
+ * @typedef {Object} RRR
+ * @property {number} normal - RRR without focus
+ * @property {number} focus - RRR with foucs
+ */
+const resourceReturnRates = {
+  city: {
+    normal: 0.152,
+    focus: 0.435
+  },
+  cityBonus: {
+    normal: 0.367,
+    focus: 0.539
+  },
+  island: {
+    normal: 0,
+    focus: 0.371
+  },
+  islandBonus: {
+    normal: 0.285,
+    focus: 0.497
+  },
+  hideout: {
+    normal: 0.2,
+    focus: 0.46
+  },
+}
+
 export {
   numberToNumeral,
   resources,
   resourcesReverse,
-  translateLocation
+  translateLocation,
+  resourceReturnRates
 }

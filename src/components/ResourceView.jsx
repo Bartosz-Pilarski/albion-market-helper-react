@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom"
 import ResourcePanel from "./ResourcePanel"
 import ResourceCalculator from "./ResourceCalculator/ResourceCalculator"
 import { capitalizeFirstLetter } from "../util/util"
+import spinner from "../images/spinner.gif"
 
 /**
  * View replacing homepage, displays ResourcePanels and a ResourceCalculator. Based on current searchParams.
@@ -38,7 +39,7 @@ const ResourceView = () => {
           <ResourcePanel resourceInfo={relevantPrices.refined} isRefined={true} />
         </div>
       </div> 
-      : <> Loading </>}
+      : <div className='spinner-container'> <img className='spinner' src={spinner} /> </div>}
 
     </div>
   )

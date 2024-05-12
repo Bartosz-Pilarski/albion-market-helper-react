@@ -167,9 +167,10 @@ const RecipeBreakdown = ({
   }
 
   const [calculatedSellPrice, calculatedNutritionCost, approxReturns] = calculateFinalSellPrice()
-  console.log(calculatedSellPrice)
-  const calculatedTax = Math.floor(calculatedSellPrice-(calculatedSellPrice*tax))
-  const calculatedProfit = calculatedSellPrice-calculatedTax-calculatedNutritionCost
+  console.log(calculatedSellPrice*tax)
+  console.log(calculatedSellPrice-(calculatedSellPrice*tax))
+  const calculatedTax = Math.floor(calculatedSellPrice*tax)
+  const calculatedProfit = calculatedSellPrice-calculatedTax-calculatedNutritionCost-calculatedBuyPrice
 
   if(!refiningCatalystRequired) return(
     <div className="resource-calculator-recipe">

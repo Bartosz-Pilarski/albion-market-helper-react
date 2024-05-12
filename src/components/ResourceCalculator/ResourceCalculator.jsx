@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
 
 import { resourceReturnRates, resourcesReverse } from "../../util/maps"
-import { BuyAndSellPanel, NutritionCalculator, RecipeBreakdown, ResourceInputs } from "./Subcomponents"
+import { BuyAndSellPanel, NutritionCalculator, RecipeBreakdown, ResourceInputs, ResourceReturnRatesPicker, TaxRatePicker } from "./Subcomponents"
 import './ResourceCalculator.scss'
 
 /**
@@ -116,44 +116,13 @@ const ResourceCalculator = ({ relevantPrices }) => {
       />
       <div className="separator"></div>
       <div className="resource-calculator-extras">
-        <div className="resource-calculator-taxes">
-          <p>Tax:</p>
-          <input 
-            type="radio" 
-            name="tax" id="tax-f2p" 
-            checked={!isTaxDiscounted}
-            onChange={() => setIsTaxDiscounted(false)}
-            />
-          <label htmlFor="tax-f2p">8.5%</label>
-          <input 
-            type="radio" 
-            name="tax" id="tax-premium" 
-            checked={isTaxDiscounted}
-            onChange={() => setIsTaxDiscounted(true)}
-            />
-          <label htmlFor="tax-premium">5.5%</label>
-        </div>
-        <div className="resource-calculator-rrr">
-          <p>Resource Return Rate:</p>
-          <select 
-            name="rrr-dropdown" id="rrr-dropdown"
-            onChange={(event) => setResourceReturnRate(JSON.parse(event.target.value)) }
-          >
-            <option value={ JSON.stringify(resourceReturnRates.cityBonus) }  >Royal City w/ Bonus </option>
-            <option value={ JSON.stringify(resourceReturnRates.city) }       >Royal City </option>
-            <option value={ JSON.stringify(resourceReturnRates.islandBonus) }>Royal Island w/ Bonus </option>
-            <option value={ JSON.stringify(resourceReturnRates.island) }     >Royal Island </option>
-            <option value={ JSON.stringify(resourceReturnRates.hideout) }    >Hideout </option>
-          </select>
-          <br />
-          <label htmlFor="focus-used"> Refining with focus? </label>
-          <input 
-            type="checkbox" 
-            name="focus" id="focus-used" 
-            checked={isFocusUsed}
-            onChange={(event) => setisFocusUsed(event.target.checked)}
-          />
-        </div>
+        <TaxRatePicker
+          isTaxDiscounted={isTaxDiscounted} setIsTaxDiscounted={setIsTaxDiscounted}
+        />
+        <ResourceReturnRatesPicker 
+          isFocusUsed={isFocusUsed} setisFocusUsed={setisFocusUsed}
+          setResourceReturnRate={setResourceReturnRate}
+        />
       </div>
       <div className="separator"></div>
       <RecipeBreakdown 

@@ -233,10 +233,39 @@ const RecipeBreakdown = ({
 
   if(!refiningCatalystRequired) return(
     <div className="resource-calculator-recipe">
+      <div className="resource-calculator-recipe-input">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"> # </th>
+              <th scope="col"> Name </th>
+              <th scope="col"> Cost (Silver) </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> {resourceInput} </td>
+              <td> {resourceHumanName} </td>
+              <td> {resourceInput*bestPrices.raw.price} </td>
+            </tr>
+            <tr>
+              <td> {resourceOutput} </td>
+              <td> {catalystHumanName} </td>
+              <td> {resourceOutput*bestPrices.catalyst.price} </td>
+            </tr>
+            <tr>
+              <td colSpan={2} scope="row"> Nutrition cost </td>
+              <td> {calculatedNutritionCost} </td>
+            </tr>
+            <tr>
+              <th colSpan={2} scope="row"> Input total </th>
+              <td> {calculatedBuyPrice+calculatedNutritionCost} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div className="resource-calculator-recipe-output">
-        <div className="resource-calculator-simple-resource">
-        <span className="resource-calculator-recipe-header"> Resource: </span> {resourceInput}x {resourceHumanName} - {resourceInput*bestPrices.raw.price} silver <br />
-        </div>
         <div className="resource-calculator-nutrition-output">
           <span className="resource-calculator-recipe-header"> Resource Return Rate: </span> {rrrHumanName} ⇀ ~{approxReturns} extra item{approxReturns !== 1 ? 's' : ''} (+{approxReturns*bestPrices.raw.price} silver)
         </div>
@@ -245,7 +274,7 @@ const RecipeBreakdown = ({
         </div>
       </div>
       <div className="resource-calculator-profit">
-       <span className={calculatedProfit > 0 ? 'profitable' : 'not-profitable'}> Profit: {calculatedSellPrice-calculatedTax} silver </span>
+       <span className={calculatedProfit > 0 ? 'profitable' : 'not-profitable'}> Profit: {calculatedProfit} silver </span>
       </div>
     </div>
   )

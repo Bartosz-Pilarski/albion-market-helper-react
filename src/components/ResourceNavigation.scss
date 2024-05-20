@@ -46,3 +46,10 @@
     }
   }
 }
+
+@media screen and (max-width: $smallScreen) {
+  .resource-navigation {
+    position: fixed;
+    margin-left: 7.5rem;
+  }
+}

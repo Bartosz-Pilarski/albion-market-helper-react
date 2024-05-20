@@ -28,13 +28,23 @@ const ResourceLink = ({ resource, searchParams, navigate }) => {
   )
 }
 
-const Navigation = () => {
+const Navigation = ({ mobileOpen, setMobileOpen}) => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const location = useLocation().pathname
 
+  const toggleOpen = () => setMobileOpen(!mobileOpen)
+
   return(
-    <nav className='main-navigation'>
+    <>
+    <button className='burger mobile-only' onClick={() => toggleOpen()}>
+      <i className="fa fa-bars"></i>
+    </button>
+    
+    <nav className={mobileOpen ? 'main-navigation' : 'main-navigation mobile-hidden'}>
+    <button className='burger-closer mobile-only' onClick={() => toggleOpen()}>
+      <i className="fa fa-bars"></i>
+    </button>
       <Link 
         //If at home page
         className={location === '/' ? 'active' : ''} 
@@ -57,6 +67,8 @@ const Navigation = () => {
       ?
       </Link>
     </nav>
+    </>
+   
   )
 }
 

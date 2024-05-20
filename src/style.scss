@@ -139,6 +139,7 @@ main {
     h2 {
       font-size: 3rem;
       color: $albionRed;
+      text-shadow: darken($albionRed, 10) 0px 0px 5px;
     }
   
     header {
@@ -185,5 +186,39 @@ main {
   footer {
     height: 5rem;
     background-color: darken($albionBlack, 8);
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  main {
+    background-size: 100vh;
+    background-position-y: 0;
+  }
+
+  #home {
+    #hero {
+      padding: 4rem 0;
+      h1 {
+        font-size: xx-large;
+      }
+      h2 {
+        font-size: x-large;
+      }
+    }
+    .section {
+      flex-direction: column;
+      padding: 1.5rem 0;
+      font-size: large;
+      height: auto;
+
+      text-align: center;
+
+      &:nth-of-type(2n) {
+        flex-direction: column-reverse;
+      }
+      .sectionImg {
+        height: 15rem;
+      }
+    }
   }
 }

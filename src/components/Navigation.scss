@@ -81,3 +81,24 @@
 
   background-color: darken($albionBlack, 10);
 }
+
+.burger, .burger-closer {
+  background-color: transparent;
+  border: none;
+  font-size: 2.5rem;
+  margin: 0.5rem;
+  color: $albionRed;
+}
+.burger {
+  position: fixed;
+}
+.burger-closer {
+  margin: 0.5rem 0 -0.75rem;
+}
+
+
+@media screen and (max-width: $smallScreen) {
+  .main-navigation {
+    position: fixed;
+  }
+}

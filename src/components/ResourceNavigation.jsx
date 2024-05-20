@@ -29,7 +29,7 @@ const ResourceLink = ({ type, tier, currentTier, navigate }) => {
  * Navigation component for picking the resource tier to refine
  * @component
  */
-const ResourceNavigation = () => {
+const ResourceNavigation = ({ mobileOpen }) => {
   //for ResourceLink components, so they share one instead of all defining a separate one
   const navigate = useNavigate()
 
@@ -38,7 +38,7 @@ const ResourceNavigation = () => {
   const currentTier = searchParams.get('tier')
   
   return(
-    <nav className='resource-navigation'>
+    <nav className={mobileOpen ? 'resource-navigation' : 'resource-navigation mobile-hidden'}>
       <p className='dimmed'>
         Pick your desired resource tier:
       </p>

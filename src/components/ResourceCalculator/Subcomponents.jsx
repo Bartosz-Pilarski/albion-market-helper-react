@@ -226,8 +226,6 @@ const RecipeBreakdown = ({
   }
 
   const [calculatedSellPrice, calculatedNutritionCost, approxReturns] = calculateFinalSellPrice()
-  console.log(calculatedSellPrice*tax)
-  console.log(calculatedSellPrice-(calculatedSellPrice*tax))
   const calculatedTax = Math.floor(calculatedSellPrice*tax)
   const calculatedProfit = calculatedSellPrice-calculatedTax-calculatedNutritionCost-calculatedBuyPrice
 

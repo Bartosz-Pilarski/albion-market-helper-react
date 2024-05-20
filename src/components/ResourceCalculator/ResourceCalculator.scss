@@ -116,6 +116,12 @@
     align-items: center;
     margin: 1.5rem 0.5rem;
     gap: 1rem;
+    
+    .resource-calculator-raw, .resource-calculator-refined {
+      h1 {
+        border-radius: 0.25rem;
+      }
+    }
   }
 
   .resource-calculator-inputs-wrapper {

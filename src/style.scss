@@ -54,6 +54,77 @@ main {
   }
 }
 
+.help-view {
+  display: flex;
+  flex-direction: column;
+  color: $albionWhite;
+  .help-view-header {
+    text-align: center;
+    font-size: 4rem;
+    color: $albionWhite;
+    text-shadow: $albionWhite 0px 0px 3px;
+    margin: 1.5rem 0;
+  }
+  .help-view-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    border-top: 4px solid $albionRed;
+    background-color: rgba(lighten($albionBlack, 2), 0.75);
+
+    height: 100%;
+    
+    padding: 2rem;
+
+    .help-view-locations, .help-view-last-update {
+      display: flex;
+      flex-direction: column;
+
+
+      color: $albionWhite;
+      background-color: darken($albionBlack, 3);
+    
+      border-top: 3px solid $albionRed;
+      border-radius: 0.5rem;
+    
+      padding: 1rem;
+      margin: 1rem;
+
+      gap: 1rem;
+      
+      ul {
+        padding: 0 5rem;
+        font-size: xx-large;
+        font-weight: bold;
+        list-style-type: none;
+        li {
+          margin-bottom: 0.2rem;
+          border-radius: 0.25rem;
+        }
+      }
+    }
+    .help-view-locations {
+      height: 22.5rem;
+    }
+    .help-view-last-update{ 
+      height: 10rem;
+      .help-view-dates {
+        border: 2px solid $albionRed;
+        border-right: none;
+        border-left: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+
+        p:last-of-type {
+          font-size: xx-large;
+        }
+        text-align: center;
+      }
+    }
+  }
+}
+
 #home {
   #hero {
     padding: 8rem 0 16rem;

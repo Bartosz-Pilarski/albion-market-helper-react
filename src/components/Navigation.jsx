@@ -50,6 +50,12 @@ const Navigation = () => {
           (resource) => <ResourceLink key={`navigation-${resource}`} resource={resource} searchParams={searchParams} navigate={navigate} /> 
         )
       }
+      <Link
+        className={location === '/help' ? 'mini active' : 'mini'} 
+        to={'/help'}
+      >
+      ?
+      </Link>
     </nav>
   )
 }

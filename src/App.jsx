@@ -9,6 +9,7 @@ import ResourceView from "./components/ResourceView.jsx"
 import { initializePrices } from "./reducers/pricesReducer.js"
 import { initializeRecipes } from "./reducers/refiningReducer.js"
 import ResourceNavigation from "./components/ResourceNavigation.jsx"
+import HelpView from "./components/HelpView.jsx"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<> <Navigation /> <Home/> </>} />
         <Route path="/refine" element={<> <Navigation /> <ResourceNavigation /> <ResourceView /> </>} />
+        <Route path="/help" element={<> <Navigation /> <HelpView /> </>} />
       </Routes>
     </main>
   )

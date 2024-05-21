@@ -14,6 +14,7 @@ const ResourceCalculator = ({ relevantPrices }) => {
   const [searchParams] = useSearchParams()
   const recipes = useSelector((state) => state.refining)
   const allPrices = useSelector((state) => state.prices)
+  const isMobile = useSelector((state) => state.isMobile)
 
   const requestedTier = parseInt(searchParams.get('tier'))
   const requestedType = searchParams.get('type').toUpperCase()
@@ -104,7 +105,7 @@ const ResourceCalculator = ({ relevantPrices }) => {
   
   return (
   <div className='resource-calculator'>
-    <BuyAndSellPanel bestPrices={bestPrices} />
+    <BuyAndSellPanel bestPrices={bestPrices} isMobile={isMobile} />
     <div className="separator"></div>
     <div className="resource-calculator-calculator">
       <NutritionCalculator nutritionCost={nutritionCost} setNutritionCost={setNutritionCost} />

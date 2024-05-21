@@ -10,17 +10,21 @@ import { initializePrices } from "./reducers/pricesReducer.js"
 import { initializeRecipes } from "./reducers/refiningReducer.js"
 import ResourceNavigation from "./components/ResourceNavigation.jsx"
 import HelpView from "./components/HelpView.jsx"
+import { initializeLayout } from "./reducers/mobileLayoutReducer.js"
+import { useWindowDimensions } from "./util/hooks.js"
 
 const App = () => {
   const dispatch = useDispatch()
 
   //Mobile visibility setting for navbars
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { width } = useWindowDimensions()
 
 
   useEffect(() => {
     dispatch(initializePrices())
     dispatch(initializeRecipes())
+    dispatch(initializeLayout(width <= 450 ? true : false))
   }, [])
 
   return (
